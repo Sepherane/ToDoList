@@ -1,6 +1,7 @@
 package com.seph.todolist;
 
 import android.os.Bundle;
+import android.util.*;
 import android.app.Activity;
 import android.view.Menu;
 import android.widget.TextView;
@@ -14,7 +15,7 @@ public class ShowListItemActivity extends Activity {
 		MySQLiteHelper db = new MySQLiteHelper(this);
 		int listId;
 		
-		listId = getIntent().getIntExtra("listid",-1);
+		listId = getIntent().getIntExtra("listid",1);
 		
 		 /*if (extras != null) {
 		     listId = parseInt(extras.getIntExtra("newscategory"));
@@ -24,11 +25,16 @@ public class ShowListItemActivity extends Activity {
 		
 		TextView t=new TextView(this); 
 		
-		String itemText = "Name: "+ db.getName(listId) + " , X coordinate: "+ db.getXval(listId) + " , Y coordinate: "
-				+ db.getYval(listId) + ".";
-
-	    t=(TextView)findViewById(R.id.textView1); 
-	    t.setText(itemText);
+		//String itemText = "Name: "+ db.getName(listId) + " , X coordinate: "+ db.getXval(listId) + " , Y coordinate: "
+		//		+ db.getYval(listId) + ".";
+		
+		String xVal = "" + db.getXval(listId);
+		Log.d("xVal",xVal);
+	    t = (TextView)findViewById(R.id.textView8);t.setText(db.getName(listId));
+	    t = (TextView)findViewById(R.id.textView9);t.setText("X coordinate ");
+	    t = (TextView)findViewById(R.id.textView10);t.setText(xVal);
+	    t = (TextView)findViewById(R.id.textView11);t.setText("Y coordinate ");
+	    t = (TextView)findViewById(R.id.textView12);t.setText(""+ db.getYval(listId));
 	}
 
 	@Override
