@@ -27,10 +27,6 @@ public class MainActivity extends Activity {
 		
 		MySQLiteHelper db = new MySQLiteHelper(this);
 		
-		/*db.addLocation("Test", 4, 5);
-		db.addLocation("Test2", 4, 5);
-		db.addLocation("Test3", 4, 5);*/
-		
 		List<Integer> ids = db.findAllLocations();
 		
 		for(int i : ids)
@@ -55,7 +51,7 @@ public class MainActivity extends Activity {
 					startActivity(intent);
 					break;
 				default:
-					intent = new Intent(MainActivity.this, ShowListItemActivity.class);
+					intent = new Intent(MainActivity.this, MyMap.class);
 					intent.putExtra("listid", position);
 					startActivity(intent);
 					break;

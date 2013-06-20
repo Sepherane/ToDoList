@@ -3,10 +3,12 @@ package com.seph.todolist;
 import android.os.Bundle;
 import android.util.*;
 import android.app.Activity;
+import android.graphics.drawable.Drawable;
 import android.view.Menu;
 import android.widget.TextView;
 
-public class ShowListItemActivity extends Activity {
+
+public class ShowListItemActivity extends Activity{
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +37,7 @@ public class ShowListItemActivity extends Activity {
 	    t = (TextView)findViewById(R.id.textView10);t.setText(xVal);
 	    t = (TextView)findViewById(R.id.textView11);t.setText("Y coordinate ");
 	    t = (TextView)findViewById(R.id.textView12);t.setText(""+ db.getYval(listId));
+	    
 	}
 
 	@Override
@@ -43,5 +46,6 @@ public class ShowListItemActivity extends Activity {
 		getMenuInflater().inflate(R.menu.show_list_item, menu);
 		return true;
 	}
+	
 
 }

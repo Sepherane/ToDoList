@@ -17,15 +17,15 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
   public static final String COLUMN_YVAL = "yval";
 
   private static final String DATABASE_NAME = "locs.db";
-  private static final int DATABASE_VERSION = 1;
+  private static final int DATABASE_VERSION = 3;
 
   // Database creation sql statement
   private static final String DATABASE_CREATE = "create table "
       + TABLE_LOCS + "(" + COLUMN_ID
       + " integer primary key autoincrement, " + COLUMN_NAME
       + " text not null, " + COLUMN_XVAL
-      + " integer not null, " + COLUMN_YVAL
-      + " integer not null);";
+      + " real not null, " + COLUMN_YVAL
+      + " real not null);";
 
   public MySQLiteHelper(Context context) {
     super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -58,7 +58,20 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
       db.close();
   }
   
-  public String getName(int id) {
+  public void addLocation(String name, float xloc, float yloc) {
+	ContentValues values = new ContentValues();
+    values.put(COLUMN_NAME, name);
+    values.put(COLUMN_XVAL, xloc);
+    values.put(COLUMN_YVAL, yloc);
+
+    SQLiteDatabase db = this.getWritableDatabase();
+    
+    db.insert(TABLE_LOCS, null, values);
+    db.close();
+	
+}
+
+public String getName(int id) {
 		String query = "Select * FROM " + TABLE_LOCS + " WHERE " + COLUMN_ID + " =  " + id;
 		
 		SQLiteDatabase db = this.getWritableDatabase();
@@ -78,18 +91,18 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 		return locationName;
 	}
   
-  public int getXval(int id) {
+  public float getXval(int id) {
 		String query = "Select * FROM " + TABLE_LOCS + " WHERE " + COLUMN_ID + " =  " + id;
 		
 		SQLiteDatabase db = this.getWritableDatabase();
 		
 		Cursor cursor = db.rawQuery(query, null);
 		
-		int xval = 0;
+		float xval = 0f;
 		
 		if (cursor.moveToFirst()) {
 			cursor.moveToFirst();
-			xval = cursor.getInt(2);
+			xval = cursor.getFloat(2);
 			cursor.close();
 		} else {
 			xval = 0;
@@ -98,18 +111,18 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 		return xval;
 	}
   
-  public int getYval(int id) {
+  public float getYval(int id) {
 		String query = "Select * FROM " + TABLE_LOCS + " WHERE " + COLUMN_ID + " =  " + id;
 		
 		SQLiteDatabase db = this.getWritableDatabase();
 		
 		Cursor cursor = db.rawQuery(query, null);
 		
-		int yval = 0;
+		float yval = 0;
 		
 		if (cursor.moveToFirst()) {
 			cursor.moveToFirst();
-			yval = cursor.getInt(3);
+			yval = cursor.getFloat(3);
 			cursor.close();
 		} else {
 			yval = 0;

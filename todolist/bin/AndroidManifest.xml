@@ -8,6 +8,12 @@
         android:minSdkVersion="8"
         android:targetSdkVersion="17" />
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+  	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+  	
+  	
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
@@ -29,6 +35,10 @@
         <activity
             android:name="com.seph.todolist.ShowListItemActivity"
             android:label="@string/title_activity_show_list_item" >
+        </activity>
+        <activity
+            android:name="com.seph.todolist.MyMap"
+            android:label="@string/title_activity_my_map" >
         </activity>
     </application>
 
