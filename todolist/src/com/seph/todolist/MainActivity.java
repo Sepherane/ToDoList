@@ -27,13 +27,14 @@ public class MainActivity extends Activity {
 		
 		MySQLiteHelper db = new MySQLiteHelper(this);
 		
-		db.addLocation("Test", 4, 5);
+		/*db.addLocation("Test", 4, 5);
 		db.addLocation("Test2", 4, 5);
-		db.addLocation("Test3", 4, 5);
+		db.addLocation("Test3", 4, 5);*/
 		
-		List<String> names = db.findAllLocations();
+		List<Integer> ids = db.findAllLocations();
 		
-		itemList.addAll(names);
+		for(int i : ids)
+		itemList.add(db.getName(i));
 		
 		ArrayAdapter adapter = new ArrayAdapter<String>(this, 
 		        R.layout.listview_main, itemList);
@@ -46,12 +47,17 @@ public class MainActivity extends Activity {
 		/* Lijst knoppen */
 		listView.setOnItemClickListener(new OnItemClickListener() {
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				Intent intent;
+				
 				switch (position){
 				case 0:
-					Intent intent = new Intent(MainActivity.this, AddnewActivity.class);
+					intent = new Intent(MainActivity.this, AddnewActivity.class);
 					startActivity(intent);
 					break;
 				default:
+					intent = new Intent(MainActivity.this, ShowListItemActivity.class);
+					intent.putExtra("listid", position);
+					startActivity(intent);
 					break;
 				}
 			}

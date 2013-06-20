@@ -58,7 +58,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
       db.close();
   }
   
-  public String findLocation(int id) {
+  public String getName(int id) {
 		String query = "Select * FROM " + TABLE_LOCS + " WHERE " + COLUMN_ID + " =  " + id;
 		
 		SQLiteDatabase db = this.getWritableDatabase();
@@ -78,8 +78,48 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 		return locationName;
 	}
   
-  public List<String> findAllLocations() { // Find ALL the locations!
-      List<String> nameList = new ArrayList<String>();
+  public int getXval(int id) {
+		String query = "Select * FROM " + TABLE_LOCS + " WHERE " + COLUMN_ID + " =  " + id;
+		
+		SQLiteDatabase db = this.getWritableDatabase();
+		
+		Cursor cursor = db.rawQuery(query, null);
+		
+		int xval = 0;
+		
+		if (cursor.moveToFirst()) {
+			cursor.moveToFirst();
+			xval = cursor.getInt(2);
+			cursor.close();
+		} else {
+			xval = 0;
+		}
+		db.close();
+		return xval;
+	}
+  
+  public int getYval(int id) {
+		String query = "Select * FROM " + TABLE_LOCS + " WHERE " + COLUMN_ID + " =  " + id;
+		
+		SQLiteDatabase db = this.getWritableDatabase();
+		
+		Cursor cursor = db.rawQuery(query, null);
+		
+		int yval = 0;
+		
+		if (cursor.moveToFirst()) {
+			cursor.moveToFirst();
+			yval = cursor.getInt(3);
+			cursor.close();
+		} else {
+			yval = 0;
+		}
+		db.close();
+		return yval;
+	}
+  
+  public List<Integer> findAllLocations() { // Find ALL the locations!
+      List<Integer> idList = new ArrayList<Integer>();
       // Select All Query
       String selectQuery = "SELECT  * FROM " + TABLE_LOCS;
 
@@ -89,14 +129,14 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
       // looping through all rows and adding to list
       if (cursor.moveToFirst()) {
           do {
-              String db_name = cursor.getString(1);
+              int db_name = cursor.getInt(0);
               // Adding contact to list
-              nameList.add(db_name);
+              idList.add(db_name);
           } while (cursor.moveToNext());
       }
       db.close();
       // return contact list
-      return nameList;
+      return idList;
   }
   
   public boolean deleteLocation(int id) {

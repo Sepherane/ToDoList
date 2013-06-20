@@ -26,6 +26,10 @@
             android:name="com.seph.todolist.AddnewActivity"
             android:label="@string/title_activity_addnew" >
         </activity>
+        <activity
+            android:name="com.seph.todolist.ShowListItemActivity"
+            android:label="@string/title_activity_show_list_item" >
+        </activity>
     </application>
 
 </manifest>
