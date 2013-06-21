@@ -11,7 +11,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -32,23 +31,40 @@ public class MyMap extends MapActivity {
     RelativeLayout customInnerView;
     TextView customTitle;
     ArrayList<OverlayItem> items = new ArrayList<OverlayItem>();
+    int lastTouchedIndex;
+    List<Integer> ids;
+    boolean started = false;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
       super.onCreate(savedInstanceState);
       setContentView(R.layout.main);
 		
-		listId = getIntent().getIntExtra("listid",1);
-
+      listId = getIntent().getIntExtra("listid",-1);
+      
       map = (MapView) findViewById(R.id.map);
-      map.getController().setZoom(13);
-      map.getController().setCenter(new GeoPoint(db.getYval(listId),db.getXval(listId)));
+      if(listId == -1)
+      {
+	      map.getController().setZoom(9);
+	      map.getController().setCenter(new GeoPoint(51.8,4.5));
+      }
+      else
+      {
+    	  map.getController().setZoom(13);
+    	  map.getController().setCenter(new GeoPoint(db.getYval(listId),db.getXval(listId)));
+      }
       map.setBuiltInZoomControls(true);
+      
+      init();
+      
+    }
+
+      public void init(){
 
       // initialize the annotation to be shown later 
       annotation = new AnnotationView(map);
       
-      float density = map.getContext().getResources().getDisplayMetrics().density;
+    float density = map.getContext().getResources().getDisplayMetrics().density;
   	annotation.setBubbleRadius((int)(12*density+0.5f));
   	// make the annotation not animate
   	annotation.setAnimated(false);
@@ -74,7 +90,7 @@ public class MyMap extends MapActivity {
 
       // set GeoPoints and title/snippet to be used in the annotation view 
       
-      List<Integer> ids = db.findAllLocations();
+      	ids = db.findAllLocations();
 		
 		for(int i : ids)
 		{
@@ -87,7 +103,7 @@ public class MyMap extends MapActivity {
 			@Override
 			public void onTap(GeoPoint pt, MapView mapView) {
 				// when tapped, show the annotation for the overlayItem
-				int lastTouchedIndex = poiOverlay.getLastFocusedIndex();
+				lastTouchedIndex = poiOverlay.getLastFocusedIndex();
 				if(lastTouchedIndex>-1){
 					OverlayItem tapped = poiOverlay.getItem(lastTouchedIndex);
 					showCustomAnnotation(tapped);
@@ -98,12 +114,22 @@ public class MyMap extends MapActivity {
     	map.getOverlays().add(poiOverlay);
     	map.invalidate();
     	
-    	Button button = (Button) findViewById(R.id.button);
-        button.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-            	Log.i("Buttonclick", ""+v);
-            }
-        });
+    	if(!started)
+    	{
+	    	Button button = (Button) findViewById(R.id.button);
+	        button.setOnClickListener(new View.OnClickListener() {
+	            public void onClick(View v) {
+	            	Log.i("Deleting...", ""+ids.get(lastTouchedIndex));
+	            	db.deleteLocation(ids.get(lastTouchedIndex));
+	            	/*poiOverlay.clear();
+	            	annotation.hide();
+	            	init();*/
+	            	Intent intent = new Intent(MyMap.this, MyMap.class);
+	                startActivity(intent);
+	            }
+	        });
+	        boolean started = true;
+    	}
     }
     
     /**

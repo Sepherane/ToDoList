@@ -17,7 +17,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
   public static final String COLUMN_YVAL = "yval";
 
   private static final String DATABASE_NAME = "locs.db";
-  private static final int DATABASE_VERSION = 3;
+  private static final int DATABASE_VERSION = 4;
 
   // Database creation sql statement
   private static final String DATABASE_CREATE = "create table "
@@ -59,6 +59,23 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
   }
   
   public void addLocation(String name, float xloc, float yloc) {
+	  
+	  	String s = "" + xloc;
+	   	while((s.split("\\.")[0].length() + s.split("\\.")[1].length()) <= 14)
+	   	{
+		   	Log.i("Num", s);
+		   	s+="1";
+	   	}
+	   	xloc = Float.parseFloat(s);
+	   	
+	   	s = "" + yloc;
+	   	while((s.split("\\.")[0].length() + s.split("\\.")[1].length()) <= 14)
+	   	{
+		   	Log.i("Num", s);
+		   	s+="1";
+	   	}
+	   	yloc = Float.parseFloat(s);
+	   	
 	ContentValues values = new ContentValues();
     values.put(COLUMN_NAME, name);
     values.put(COLUMN_XVAL, xloc);
