@@ -24,12 +24,13 @@ public class AddnewActivity extends Activity {
             	EditText text = (EditText)findViewById(R.id.editText1);
             	String name = text.getText().toString();
         		
-        		float randomY = (float) (51.80 + (Math.random() * ((52 - 51.80))));
+        		/*float randomY = (float) (51.80 + (Math.random() * ((52 - 51.80))));
         		float randomX = (float) (4.3 + (Math.random() * ((4.7 - 4.3))));
             	
-            	db.addLocation(name, randomX, randomY);
+            	db.addLocation(name, randomX, randomY);*/
                 
-                Intent intent = new Intent(AddnewActivity.this, MainActivity.class);
+                Intent intent = new Intent(AddnewActivity.this, AddnewMap.class);
+                intent.putExtra("todoName", name);
                 startActivity(intent);
                 
             }

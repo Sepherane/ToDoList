@@ -59,25 +59,25 @@ public class MyMap extends MapActivity {
       
     }
 
-      public void init(){
+    public void init(){
 
-      // initialize the annotation to be shown later 
-      annotation = new AnnotationView(map);
-      
-    float density = map.getContext().getResources().getDisplayMetrics().density;
-  	annotation.setBubbleRadius((int)(12*density+0.5f));
-  	// make the annotation not animate
-  	annotation.setAnimated(false);
-  	
-  	// init our custom innerView from an xml file
-  		LayoutInflater li = (LayoutInflater)map.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-      customInnerView = (RelativeLayout) li.inflate(R.layout.inner_view, null);
-      customTitle = (TextView) customInnerView.findViewById(R.id.title);
-      
-      // now use the customInnerView as the annotation's innerView
-      annotation.setInnerView(customInnerView);
-
-      addPoiOverlay();
+	    // initialize the annotation to be shown later 
+	    annotation = new AnnotationView(map);
+	      
+	    float density = map.getContext().getResources().getDisplayMetrics().density;
+	  	annotation.setBubbleRadius((int)(12*density+0.5f));
+	  	// make the annotation not animate
+	  	annotation.setAnimated(false);
+	  	
+	  	// init our custom innerView from an xml file
+	  	LayoutInflater li = (LayoutInflater)map.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+	    customInnerView = (RelativeLayout) li.inflate(R.layout.inner_view, null);
+	    customTitle = (TextView) customInnerView.findViewById(R.id.title);
+	      
+	    // now use the customInnerView as the annotation's innerView
+	    annotation.setInnerView(customInnerView);
+	
+	    addPoiOverlay();
     }
 
     // add an itemized overlay to map 
@@ -102,6 +102,7 @@ public class MyMap extends MapActivity {
 		poiOverlay.setTapListener(new ItemizedOverlay.OverlayTapListener() {
 			@Override
 			public void onTap(GeoPoint pt, MapView mapView) {
+				Log.i("Point", ""+pt);
 				// when tapped, show the annotation for the overlayItem
 				lastTouchedIndex = poiOverlay.getLastFocusedIndex();
 				if(lastTouchedIndex>-1){

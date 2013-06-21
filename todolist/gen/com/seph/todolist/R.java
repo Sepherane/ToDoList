@@ -25,12 +25,13 @@ public final class R {
         public static final int location_marker=0x7f020001;
     }
     public static final class id {
-        public static final int action_settings=0x7f080010;
+        public static final int action_settings=0x7f080011;
         public static final int button=0x7f08000e;
         public static final int button1=0x7f080002;
+        public static final int button2=0x7f08000f;
         public static final int editText1=0x7f080001;
         public static final int listView1=0x7f080003;
-        public static final int map=0x7f08000f;
+        public static final int map=0x7f080010;
         public static final int tableLayout1=0x7f080004;
         public static final int tableRow1=0x7f080005;
         public static final int tableRow2=0x7f080007;
@@ -45,24 +46,28 @@ public final class R {
     }
     public static final class layout {
         public static final int activity_addnew=0x7f030000;
-        public static final int activity_main=0x7f030001;
-        public static final int activity_my_map=0x7f030002;
-        public static final int activity_show_list_item=0x7f030003;
-        public static final int inner_view=0x7f030004;
-        public static final int listview_main=0x7f030005;
-        public static final int main=0x7f030006;
+        public static final int activity_addnew_map=0x7f030001;
+        public static final int activity_main=0x7f030002;
+        public static final int activity_my_map=0x7f030003;
+        public static final int activity_show_list_item=0x7f030004;
+        public static final int inner_view=0x7f030005;
+        public static final int inner_view_addnew=0x7f030006;
+        public static final int listview_main=0x7f030007;
+        public static final int main=0x7f030008;
     }
     public static final class menu {
         public static final int addnew=0x7f070000;
-        public static final int main=0x7f070001;
-        public static final int my_map=0x7f070002;
-        public static final int show_list_item=0x7f070003;
+        public static final int addnew_map=0x7f070001;
+        public static final int main=0x7f070002;
+        public static final int my_map=0x7f070003;
+        public static final int show_list_item=0x7f070004;
     }
     public static final class string {
         public static final int action_settings=0x7f050001;
         public static final int app_name=0x7f050000;
         public static final int hello_world=0x7f050002;
         public static final int title_activity_addnew=0x7f050003;
+        public static final int title_activity_addnew_map=0x7f050006;
         public static final int title_activity_my_map=0x7f050005;
         public static final int title_activity_show_list_item=0x7f050004;
     }
