@@ -85,15 +85,7 @@ public class AddnewMap extends MapActivity {
         @Override
         public boolean onTap(GeoPoint p, MapView mapView) {
             
-        	if(!items.isEmpty())
-        	{
-        		Intent intent = new Intent(AddnewMap.this, AddnewMap.class);
-        		intent.putExtra("todoName",getIntent().getExtras().getString("todoName"));
-        		intent.putExtra("savedLat", latitude);
-        		intent.putExtra("savedLong", longitude);
-        		startActivity(intent);
-        	}
-            
+        	if(items.isEmpty())
             addAnnotation(p);
             return false;
         }
