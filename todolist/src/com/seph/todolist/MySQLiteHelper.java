@@ -45,7 +45,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
     onCreate(db);
   }
   
-  public void addLocation(String name, int xloc, int yloc) {
+  /*public void addLocation(String name, int xloc, int yloc) {
 
       ContentValues values = new ContentValues();
       values.put(COLUMN_NAME, name);
@@ -56,11 +56,11 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
       
       db.insert(TABLE_LOCS, null, values);
       db.close();
-  }
+  }*/
   
   public void addLocation(String name, float xloc, float yloc) {
 	  
-	  	String s = "" + xloc;
+	  	/*String s = "" + xloc;
 	   	while((s.split("\\.")[0].length() + s.split("\\.")[1].length()) <= 14)
 	   	{
 		   	Log.i("Num", s);
@@ -74,7 +74,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 		   	Log.i("Num", s);
 		   	s+="1";
 	   	}
-	   	yloc = Float.parseFloat(s);
+	   	yloc = Float.parseFloat(s);*/
 	   	
 	ContentValues values = new ContentValues();
     values.put(COLUMN_NAME, name);
